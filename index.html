@@ -1,30 +1,89 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-<header>
-    <h1>The fantastical, funny, weird, superduper and awesome <span>HYF quiz</span></h1>
-</header>
-<main>
-    <p class="loading">loading...</p>
-    <form action="">
-        <ul class="questions">
+    <link rel="shortcut icon" href="img/fi.ico" type="image/x-icon">
+    <link rel="icon" href="img/fi.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
 
-        </ul>
-        <button id="sendAnswers">
-            Get score
-        </button>
-    </form>
-    <div class="result"></div>
-    <canvas id="confetti"></canvas>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.13/dist/index.min.js"></script>
-<script src="temp/helper.js"></script>
-<script src="main.js"></script>
+    <title>Who will win the million</title>
+</head>
+
+
+<body>
+<div class="container pt-10">
+    <main>
+        <p class="loading reverse-spinner">loading...</p>
+        <form action="">
+            <div class="row">
+                <div class="col-lg-3 ">
+                    <canvas></canvas>
+                    <ol class="p-0" id="questionsList"></ol>
+
+                    <h3 id="score">Score:
+                        <span id="currentResult">0</span>
+                        /
+                        <span id="totalQuestionsCount">0</span>
+                    </h3>
+                </div>
+                <div class="col-lg-9">
+                    <a id="start" href="#" class="btn btn-benna100">Start</a>
+                    <a id="start-again" href="index.html" style="display: none" class="btn btn-benna100">Start again</a>
+                    <canvas id="confetti"></canvas>
+                    <div class="questions"></div>
+                </div>
+            </div>
+        </form>
+
+    </main>
+
+    <!-- alerts modal -->
+    <div class="modal fade text-dark" id="alert-modal" tabindex="-1" role="dialog" aria-labelledby="alert-title"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alert-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="alert-body" class="modal-body text-center">
+                </div>
+                <div class="modal-footer">
+                    <button id="next-question" data-dismiss="modal" type="button" class="btn btn-benna100">Next Question</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /alerts modal -->
+
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <!-- /bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.13/dist/index.min.js"></script>
+    <script src="js/helper.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/main.js"></script>
+</div>
 </body>
 
 </html>
