@@ -1,15 +1,15 @@
 // hide loading... when data fetched successfully
-function hideLoading() {
+let hideLoading = () => {
     document.querySelector('.loading').style.display = 'none';
-}
+};
 
 // --------------------------
 /**
  * add active class to current question in questions menu
  * @param {number} currentQuestionNumber
  */
-function activeCurrentQuestion(currentQuestionNumber) {
-    document.querySelectorAll('#questionsList li').forEach(function (question) {
+let activeCurrentQuestion = currentQuestionNumber => {
+    document.querySelectorAll('#questionsList li').forEach(question => {
         const questionClasses = question.classList;
         if (question.id === `question-${currentQuestionNumber}`) {
             questionClasses.add('active');
@@ -17,33 +17,33 @@ function activeCurrentQuestion(currentQuestionNumber) {
             questionClasses.remove('active');
         }
     })
-}
+};
 
 // --------------------------
 /**
  * Hide All Questions
  */
-function hideAllQuestions() {
+let hideAllQuestions = () => {
     document
         .querySelector('.questions')
         .querySelectorAll('.questionDiv')
         .forEach(question => question.style.display = 'none');
-}
+};
 
 // --------------------------
-function confettiStart() {
+let confettiStart = () => {
     if (score === totalQuestionsCount) {
         let confetti = new ConfettiGenerator({target: 'confetti'});
         confetti.render();
     }
-}
+};
 
 // --------------------------
 /**
  * hide all questions rendered except the question has id equal to question-{currentQuestionIndex}
  * @param {number} currentQuestionIndex
  */
-function showQuestion(currentQuestionIndex) {
+let showQuestion = currentQuestionIndex => {
     if (totalQuestionsCount === currentQuestionIndex) {
         document.querySelector('#start-again').style.display = 'block';
         hideAllQuestions();
@@ -65,14 +65,14 @@ function showQuestion(currentQuestionIndex) {
     activeCurrentQuestion(currentQuestionIndex);
     // start timer
     timer.timerRun();
-}
+};
 
 // --------------------------
 /**
  * the list of questions, current question, the balance foreach one of them
  * @param {Array} questions
  */
-function renderQuestionsList(questions) {
+let renderQuestionsList = questions => {
     let content = '';
     questions.forEach((question, index) => {
         content += `<li id="question-${index}">
@@ -85,7 +85,7 @@ function renderQuestionsList(questions) {
     document.querySelector('#totalQuestionsCount').innerHTML = totalQuestionsCount;
 
     hideAllQuestions();
-}
+};
 
 // --------------------------
 /**
@@ -93,40 +93,40 @@ function renderQuestionsList(questions) {
  * @param {number} questionNumber
  * @returns {Element}
  */
-function getCorrectAnswerLabel(questionNumber) {
+let getCorrectAnswerLabel = questionNumber => {
     const correctAnswerInputRadioId = document.querySelector(`#question-${questionNumber} input[data-correct="true"]`).id;
     return document.querySelector(`label[for="${correctAnswerInputRadioId}"]`);
-}
+};
 
 // --------------------------
 /**
  * background (green flashing) at correct answer
  * @param questionNumber
  */
-function highlightCorrectAnswer(questionNumber) {
+let highlightCorrectAnswer = questionNumber => {
     const correctAnswerLabel = getCorrectAnswerLabel(questionNumber);
     correctAnswerLabel.classList.add('green-pulsing');
-}
+};
 
 // --------------------------
 /**
  * if the user answer if incorrect set red color as a background for selected answer
  * @param {Element} userAnswer
  */
-function highlightUserAnswer(userAnswer) {
+let highlightUserAnswer = userAnswer => {
     const userAnswerLabel = document.querySelector(`label[for="${userAnswer.id}"]`);
     userAnswerLabel.style.backgroundColor = '#C13530';
-}
+};
 
 // --------------------------
 /**
  * increment and update rendered results
  * @param number
  */
-function updateScore(number) {
+let updateScore = number => {
     score += number;
     document.querySelector('#currentResult').innerHTML = score;
-}
+};
 
 // --------------------------
 /**
@@ -134,7 +134,7 @@ function updateScore(number) {
  * @param {number} questionNumber
  * @param {string} isUserAnswerCorrect
  */
-function lineThroughQuestion(questionNumber, isUserAnswerCorrect) {
+let lineThroughQuestion = (questionNumber, isUserAnswerCorrect) => {
     const currentQuestionClasses = document.querySelector(`#question-${questionNumber}`).classList;
     if (isUserAnswerCorrect === 'false' || isUserAnswerCorrect === 'timesUp') {
         currentQuestionClasses.add('line-through');
@@ -142,14 +142,14 @@ function lineThroughQuestion(questionNumber, isUserAnswerCorrect) {
     else {
         currentQuestionClasses.remove('line-through');
     }
-}
+};
 
 // --------------------------
 /**
  * trigger bootstrap modal after modify it content
  * @param {String} isCorrect true,false,or timesUp
  */
-function showAlertModal(isCorrect) {
+let showAlertModal = isCorrect => {
     timer.timerRun = false;
     const alertTitle = document.querySelector('#alert-title');
     const alertBody = document.querySelector('#alert-body');
@@ -168,14 +168,14 @@ function showAlertModal(isCorrect) {
 
 
     $('#alert-modal').modal('show');
-}
+};
 
 // --------------------------
 /**
  * check the selected answer
  * @param {Element} userAnswer
  */
-function checkUserAnswer(userAnswer) {
+let checkUserAnswer = userAnswer => {
     const question = userAnswer.id.match(/\d/g)[0];
     const isCorrect = userAnswer.dataset.correct;
 
@@ -190,7 +190,7 @@ function checkUserAnswer(userAnswer) {
         updateScore(1);
     }
     showAlertModal(isCorrect);
-}
+};
 
 // --------------------------
 /**
@@ -205,7 +205,7 @@ let renderQuiz = (questions) => {
     questions.forEach((question, index) => {
 
         questionsListContent += `<div class="questionDiv" id="question-${index}">
-                                        <div class="question-title pt-4 pb-4">
+                                        <div class="question-title pt-md-4 pb-md-4">
                                             <h4>${question.title}</h4>
                                             <span>${question.content}</span>
                                         </div>
@@ -217,6 +217,7 @@ let renderQuiz = (questions) => {
     listenToUserAnswers(list);
 
 };
+
 // --------------------------
 /**
  * render options
@@ -232,10 +233,9 @@ let renderOptions = (options, questionIndex) => {
                     type="radio" 
                     id="question-${questionIndex}-option-${optionIndex}" 
                     data-correct="${option.correct}" >
-                  <label class="btn btn-option btn-block" 
+                  <label class="btn btn-option btn-block ripple" 
                     for="question-${questionIndex}-option-${optionIndex}"> ${option.content} </label>
                 </div>`;
     });
     return res;
 };
-

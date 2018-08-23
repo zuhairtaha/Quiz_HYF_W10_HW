@@ -8,7 +8,7 @@ function Timer(el) {
     this.TIMER_BORDER = 3;
     this.TIMER_COLOR1 = "#ececec";
     this.TIMER_COLOR2 = "#f1b51b";
-    this.TIMER_DURATION = 30000;
+    this.TIMER_DURATION = 60000; // <== time can set here...
     this.TIME_ELAPSED = 0;
     this.DOT_RADIUS = 6;
     this.MAXFPS = 60;
@@ -76,11 +76,13 @@ Timer.prototype.render = function () {
 Timer.prototype.timerRun = function () {
     let self = this;
     if (self.TIME_ELAPSED >= self.TIMER_DURATION) {
-        // finished
+        /** ************************************************ */
+        // after counter finished (My code goes here...)
         highlightCorrectAnswer(currentQuestionIndex);
         lineThroughQuestion(currentQuestionIndex, 'timesUp');
         showAlertModal('timesUp');
         return false;
+        /** ************************************************ */
     }
     if (!self.lastRender) self.lastRender = Date.now();
     let delta = Date.now() - self.lastRender;
@@ -89,8 +91,7 @@ Timer.prototype.timerRun = function () {
         self.TIME_ELAPSED += delta;
         self.lastRender = self.render();
     }
-    if (self.timerRun !== false)
+    if (self.timerRun !== false) { // <== also, I added this
         requestAnimationFrame(self.timerRun.bind(self));
+    }
 };
-
-

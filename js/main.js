@@ -14,16 +14,16 @@ let timer; // timers deceleration
  * play audio file
  * @param {string} trackName
  */
-function playSound(trackName) {
+let playSound = trackName => {
     document.querySelector('.audio').innerHTML =
         `<audio controls autoplay id="audio-example"> <source src="mp3/${trackName}.mp3"> </audio>`;
-}
+};
 
 // --------------------------
 /**
  * click on start button
  */
-document.querySelector('#start').addEventListener('click', function (e) {
+document.querySelector('#start').addEventListener('click', e => {
     e.preventDefault();
     e.target.style.display = 'none';
     showQuestion(0);
@@ -56,10 +56,10 @@ document.querySelector('#next-question').addEventListener('click', () => {
  * when the user select an answer
  * @param {Element} list
  */
-function listenToUserAnswers(list) {
-    list.querySelectorAll('.questionDiv input[type=radio]').forEach(function (question) {
+let listenToUserAnswers = list => {
+    list.querySelectorAll('.questionDiv input[type=radio]').forEach(question => {
         question.addEventListener('click', function () {
             checkUserAnswer(this);
         })
     })
-}
+};
