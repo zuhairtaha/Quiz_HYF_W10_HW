@@ -40,31 +40,44 @@ let confettiStart = () => {
 
 // --------------------------
 /**
+ * Restart timer
+ */
+let restartTimer = () => {
+    // start timer
+    timer = new Timer(document.querySelector('canvas'));
+    timer.timerRun();
+};
+// --------------------------
+let readQuestion = questionIndex => {
+    let text = document.querySelector(`#question-${questionIndex} > div.question-title > span`).innerHTML;
+    let questionTitle = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(questionTitle);
+
+};
+// --------------------------
+/**
  * hide all questions rendered except the question has id equal to question-{currentQuestionIndex}
  * @param {number} currentQuestionIndex
  */
 let showQuestion = currentQuestionIndex => {
+
+    // if this is the last question
     if (totalQuestionsCount === currentQuestionIndex) {
         document.querySelector('#start-again').style.display = 'block';
         hideAllQuestions();
         confettiStart();
         return;
     }
-    timer = new Timer(document.querySelector('canvas'));
+
     document
         .querySelector('.questions')
         .querySelectorAll('.questionDiv')
         .forEach(question => {
-            if (question.id === 'question-' + currentQuestionIndex) {
-                question.style.display = 'block';
-            }
-            else {
-                question.style.display = 'none';
-            }
+            question.style.display = question.id === 'question-' + currentQuestionIndex ? 'block' : 'none';
         });
     activeCurrentQuestion(currentQuestionIndex);
-    // start timer
-    timer.timerRun();
+    readQuestion(currentQuestionIndex);
+    restartTimer();
 };
 
 // --------------------------
