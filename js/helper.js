@@ -36,7 +36,6 @@ function confettiStart() {
         let confetti = new ConfettiGenerator({target: 'confetti'});
         confetti.render();
     }
-
 }
 
 // --------------------------
@@ -157,10 +156,13 @@ function showAlertModal(isCorrect) {
 
     if (isCorrect === 'false') {
         alertTitle.innerHTML = 'Incorrect!';
+        playSound('wrong');
     } else if (isCorrect === 'true') {
         alertTitle.innerHTML = 'Correct';
+        playSound('correct');
     } else if (isCorrect === 'timesUp') {
         alertTitle.innerHTML = 'Times up';
+        playSound('wrong');
     }
     alertBody.innerHTML = `<img src='img/${isCorrect}.jpg'/>`;
 

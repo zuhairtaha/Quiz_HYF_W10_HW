@@ -189,3 +189,7 @@ ul#questionsBalances {
 .line-through {
     text-decoration: line-through;
 }
+
+.hide, .audio {
+    display: none;
+}
